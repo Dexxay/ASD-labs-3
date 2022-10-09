@@ -32,25 +32,6 @@ namespace lab1
             FileSystem.RenameFile(tempFilename, filename);
             Console.WriteLine("Pre-Sort is done");
         }
-        private int[] FillIntDataArr(BinaryReader binReader, long partSize)
-        {
-            byte[] binData;
-            long count = binReader.BaseStream.Length - binReader.BaseStream.Position;
-
-            if (count <= partSize * sizeof(int) && count <= _bufferSize * sizeof(int))
-                binData = binReader.ReadBytes((int)count);
-            else if (partSize < _bufferSize)
-                binData = binReader.ReadBytes((int)partSize * sizeof(int));
-            else
-                binData = binReader.ReadBytes((int)_bufferSize * sizeof(int));
-
-            int[] intData = new int[binData.Length / sizeof(int)];
-            for (int i = 0; i < intData.Length; i++)
-                intData[i] = BitConverter.ToInt32(binData[(i * sizeof(int))..((i + 1) * sizeof(int))]);
-
-            return intData;
-        }
-
         protected void Split(string filepath, string tempB, string tempC, long partSize)
         {
             BinaryReader binReader = new BinaryReader(new FileStream(filepath, FileMode.Open));
@@ -83,22 +64,18 @@ namespace lab1
             BinaryReader binReaderB = new BinaryReader(new FileStream(tempB, FileMode.Open));
             BinaryReader binReaderC = new BinaryReader(new FileStream(tempC, FileMode.Open));
 
-            long counterB, counterC;
-            int[] b, c;
+
             while (!StreamEnd(binReaderC))
             {
-                counterB = 0;
-                counterC = 0;
-                int bIndex = 0;
-                int cIndex = 0;
-                b = FillIntDataArr(binReaderB, partSize);
-                c = FillIntDataArr(binReaderC, partSize);
+                long counterB = 0, counterC = 0;
+                int bIndex = 0, cIndex = 0;
+                int[] b = FillIntDataArr(binReaderB, partSize);
+                int[] c = FillIntDataArr(binReaderC, partSize);
                 while (true)
                 {
                     if (b[bIndex] <= c[cIndex])
                     {
-                        binWriter.Write(b[bIndex++]);
-                        counterB++;
+                        WriteNumberToA(b, ref bIndex, ref counterB, binWriter);
                         if (b.Length == bIndex)
                         {
                             if (counterB < partSize)
@@ -108,21 +85,12 @@ namespace lab1
                             }
                             else
                             {
-                                while (c.Length > cIndex)
-                                {
-                                    binWriter.Write(c[cIndex]);
-                                    counterC++;
-                                    cIndex++;
-                                }
+                                WriteArrayToA(c, ref cIndex, ref counterC, binWriter);
                                 while (counterC < partSize && !StreamEnd(binReaderC))
                                 {
                                     c = FillIntDataArr(binReaderC, partSize - counterC);
                                     cIndex = 0;
-                                    while (c.Length > cIndex)
-                                    {
-                                        binWriter.Write(c[cIndex++]);
-                                        counterC++;
-                                    }
+                                    WriteArrayToA(c, ref cIndex, ref counterC, binWriter);
                                 }
                                 break;
                             }
@@ -130,8 +98,7 @@ namespace lab1
                     }
                     else
                     {
-                        binWriter.Write(c[cIndex++]);
-                        counterC++;
+                        WriteNumberToA(c, ref cIndex, ref counterC, binWriter);
                         if (c.Length - cIndex == 0)
                         {
                             if (counterC < partSize && !StreamEnd(binReaderC))
@@ -141,20 +108,12 @@ namespace lab1
                             }
                             else
                             {
-                                while (b.Length > bIndex)
-                                {
-                                    binWriter.Write(b[bIndex++]);
-                                    counterB++;
-                                }
+                                WriteArrayToA(b, ref bIndex, ref counterB, binWriter);
                                 while (counterB < partSize)
                                 {
                                     b = FillIntDataArr(binReaderB, partSize - counterB);
                                     bIndex = 0;
-                                    while (b.Length > bIndex)
-                                    {
-                                        binWriter.Write(b[bIndex++]);
-                                        counterB++;
-                                    }
+                                    WriteArrayToA(b, ref bIndex, ref counterB, binWriter);
                                 }
                                 break;
                             }
@@ -162,7 +121,6 @@ namespace lab1
                     }
                 }
             }
-            //binaryWriter.Write(binaryReaderB.ReadBytes((int)(binaryReaderB.BaseStream.Length - binaryReaderB.BaseStream.Length)));
             binWriter.Write(binReaderB.ReadBytes((int)(binReaderC.BaseStream.Length - binReaderB.BaseStream.Length)));
             binWriter.Close();
             binReaderB.Close();
@@ -170,7 +128,40 @@ namespace lab1
             File.Delete(tempB);
             File.Delete(tempC);
         }
+        private int[] FillIntDataArr(BinaryReader binReader, long partSize)
+        {
+            byte[] binData;
+            long count = binReader.BaseStream.Length - binReader.BaseStream.Position;
 
+            if (count <= partSize * sizeof(int) && count <= _bufferSize * sizeof(int))
+                binData = binReader.ReadBytes((int)count);
+            else if (partSize < _bufferSize)
+                binData = binReader.ReadBytes((int)partSize * sizeof(int));
+            else
+                binData = binReader.ReadBytes((int)_bufferSize * sizeof(int));
+
+            int[] intData = new int[binData.Length / sizeof(int)];
+            for (int i = 0; i < intData.Length; i++)
+                intData[i] = BitConverter.ToInt32(binData[(i * sizeof(int))..((i + 1) * sizeof(int))]);
+
+            return intData;
+        }
+
+        private void WriteArrayToA(int[] numbers, ref int index, ref long counter, BinaryWriter binWriter)
+        {
+            while (numbers.Length > index)
+            {
+                binWriter.Write(numbers[index]);
+                counter++;
+                index++;
+            }
+        }
+        private void WriteNumberToA(int[] numbers, ref int index, ref long counter, BinaryWriter binWriter)
+        {
+            binWriter.Write(numbers[index]);
+            counter++;
+            index++;
+        }
         protected bool StreamEnd(BinaryReader binReader)
         {
             if (binReader.BaseStream.Position == binReader.BaseStream.Length)
