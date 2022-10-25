@@ -1,0 +1,15 @@
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\bin\Debug\net6.0\Lab2PA.exe
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\bin\Debug\net6.0\Lab2PA.deps.json
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\bin\Debug\net6.0\Lab2PA.runtimeconfig.json
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\bin\Debug\net6.0\Lab2PA.dll
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\bin\Debug\net6.0\Lab2PA.pdb
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\Lab2PA.csproj.AssemblyReference.cache
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\Lab2PA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\Lab2PA.AssemblyInfoInputs.cache
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\Lab2PA.AssemblyInfo.cs
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\Lab2PA.csproj.CoreCompileInputs.cache
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\Lab2PA.dll
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\refint\Lab2PA.dll
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\Lab2PA.pdb
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\Lab2PA.genruntimeconfig.cache
+C:\Users\Jimbo\Desktop\Lab2PA\Lab2PA\obj\Debug\net6.0\ref\Lab2PA.dll
