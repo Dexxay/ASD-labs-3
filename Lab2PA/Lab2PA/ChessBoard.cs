@@ -9,12 +9,25 @@ namespace Lab2PA
     internal class ChessBoard
     {
         private byte[] table;
-        private int size;
+        private byte size;
 
         public ChessBoard(string message, int minLimit, int maxLimit)
         {
-            size = InputInt(message, minLimit, maxLimit);
+            size = InputByte(message, minLimit, maxLimit);
             table = InputQueens();
+        }
+        public ChessBoard(byte parentSize, byte[] parentTable)
+        {
+            size = parentSize;
+            table = new byte[(int)size];
+            Array.Copy(parentTable, table, (int)size);
+        }
+        public byte[] GetArray() {
+            return table;
+        }
+        public byte GetSize()
+        {
+            return size;
         }
         private byte[] InputQueens()
         {
@@ -27,44 +40,41 @@ namespace Lab2PA
             return table;
         }
 
+        public byte GetQueenCol (int row){
+            return table[row];
+        }
+        public void MoveQueen(int row, byte newCol)
+        {
+            if (newCol < 0 || newCol > size-1 || row < 0 || row > size-1)
+            {
+                Console.Write("Wrong position.");
+                return;
+            }
+            table[row] = newCol;
+        }
+
         public int CountConflicts()
         {
             int count = 0;
-
-            count+= VerticalConflictsCount();
-
-            Console.WriteLine("Vertical conflicts: " + count);
-
+            count += VerticalConflictsCount();
 
             for (int col = 0; col < size - 1; col++)
             {
                 count += MainDiagonalCount(0, col);
-            }
-
-            for (int row = 1; row < size-1; row++)
-            {
-                count += MainDiagonalCount(row, 0);
-            }
-
-            Console.WriteLine("Main diagonal conflicts: " + count);
-
-            for (int col = 0; col < size - 1; col++)
-            {
                 count += SecondaryDiagonalCount(size - 1, col);
             }
 
             for (int row = 1; row < size - 1; row++)
             {
+                count += MainDiagonalCount(row, 0);
                 count += SecondaryDiagonalCount(row, 0);
             }
-
-            Console.WriteLine("Secondary diagonal conflicts: " + count);
 
             return count;
         }
 
         // Vertical conflicts;  horizontal conflicts == 0
-        public int VerticalConflictsCount()
+        private int VerticalConflictsCount()
         {
             int count = 0;
             for (int i = 0; i < size - 1; i++)
@@ -125,13 +135,13 @@ namespace Lab2PA
             return count;
         }
 
-        public static int InputInt(string message, int minLimit, int maxLimit)
+        private static byte InputByte(string message, int minLimit, int maxLimit)
         {
             Console.Write($"Enter {message} ({minLimit} <= N <= {maxLimit}): ");
             while (true)
             {
                 string input = Console.ReadLine();
-                if (int.TryParse(input, out int number) && number >= minLimit && number <= maxLimit)
+                if (byte.TryParse(input, out byte number) && number >= minLimit && number <= maxLimit)
                 {
                     return number;
                 }
@@ -140,20 +150,20 @@ namespace Lab2PA
                     Console.Write("Wrong input. Try again: ");
                 }
             }
-        }
+        }  
         public void ShowBoard()
         {
             Console.WriteLine("\nYour table is:");
             Console.Write("  ");
             for (int c = 0; c < size; c++)
             {
-                Console.Write($" {c} ");
+                Console.Write($" {c%10} ");
             }
             Console.WriteLine();
 
             for (int i = 0; i < size; i++)
             {
-                Console.Write(i + " ");
+                Console.Write(i%10 + " ");
                 for (int j = 0; j < size; j++)
                 {
                     if (table[i] == j)
