@@ -13,6 +13,7 @@ namespace Lab2PA
         {
             return result;
         }
+
         protected StatsAssistant statsAssistant;
         public StatsAssistant GetStats()
         {

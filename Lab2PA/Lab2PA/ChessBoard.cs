@@ -22,21 +22,14 @@ namespace Lab2PA
             table = new byte[(int)size];
             Array.Copy(parentTable, table, (int)size);
         }
-        public byte[] GetArray() {
-            return table;
-        }
-        public byte GetSize()
-        {
-            return size;
-        }
+        public byte[] GetArray() { return table; }
+        public byte GetSize() { return size; }
         private byte[] InputQueens()
         {
             byte[] table = new byte[size];
             Random random = new Random();
             for (int i = 0; i < size; i++)
-            {
                 table[i] = Convert.ToByte(random.Next(0, size));
-            }
             return table;
         }
 
@@ -84,14 +77,10 @@ namespace Lab2PA
                 for (int j = i + 1; j < size; j++)
                 {
                     if (temp == table[j])
-                    {
                         colCount++;
-                    }
                 }
                 if (colCount > 1)
-                {
                     colCount--;
-                }
                 count += colCount;
             }
             return count;
@@ -104,15 +93,11 @@ namespace Lab2PA
             for (int i = row; i < size; i++)
             {
                 if (table[i] == col)
-                {
                     count++;
-                }
                 col++;
             }
             if (count > 0)
-            {
                 count--;
-            }
             return count;
         }
 
@@ -123,15 +108,11 @@ namespace Lab2PA
             for (int i = row; i >= 0; i--)
             {
                 if (table[i] == col)
-                {
                     count++;
-                }
                 col++;
             }
             if (count > 0)
-            {
                 count--;
-            }
             return count;
         }
 
@@ -142,23 +123,18 @@ namespace Lab2PA
             {
                 string input = Console.ReadLine();
                 if (byte.TryParse(input, out byte number) && number >= minLimit && number <= maxLimit)
-                {
                     return number;
-                }
                 else
-                {
                     Console.Write("Wrong input. Try again: ");
-                }
             }
         }  
         public void ShowBoard()
         {
             Console.WriteLine("\nYour table is:");
+            ShowArray();
             Console.Write("  ");
             for (int c = 0; c < size; c++)
-            {
                 Console.Write($" {c%10} ");
-            }
             Console.WriteLine();
 
             for (int i = 0; i < size; i++)
@@ -167,16 +143,24 @@ namespace Lab2PA
                 for (int j = 0; j < size; j++)
                 {
                     if (table[i] == j)
-                    {
                         Console.Write("[Q]");
-                    }
                     else
-                    {
                         Console.Write("[_]");
-                    }
                 }
                 Console.WriteLine();
             }
+        }
+        public void ShowArray()
+        {
+            Console.Write("{ ");
+            for (int i = 0; i < table.Length; i++)
+            {
+                if (i == table.Length - 1)
+                    Console.Write(table[i] + " ");
+                else
+                    Console.Write(table[i] + "; ");
+            }
+            Console.WriteLine("}");
         }
     }
 }
