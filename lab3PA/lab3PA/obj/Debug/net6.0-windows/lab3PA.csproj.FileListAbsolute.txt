@@ -1,0 +1,17 @@
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.csproj.AssemblyReference.cache
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.Form1.resources
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.csproj.GenerateResource.cache
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.AssemblyInfoInputs.cache
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.AssemblyInfo.cs
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.csproj.CoreCompileInputs.cache
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\bin\Debug\net6.0-windows\lab3PA.exe
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\bin\Debug\net6.0-windows\lab3PA.deps.json
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\bin\Debug\net6.0-windows\lab3PA.runtimeconfig.json
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\bin\Debug\net6.0-windows\lab3PA.dll
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\bin\Debug\net6.0-windows\lab3PA.pdb
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.dll
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\refint\lab3PA.dll
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.pdb
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\lab3PA.genruntimeconfig.cache
+C:\Users\Jimbo\Desktop\lab3PA\lab3PA\obj\Debug\net6.0-windows\ref\lab3PA.dll
